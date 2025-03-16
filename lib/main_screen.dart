@@ -112,7 +112,12 @@ class _MainScreenState extends State<MainScreen> {
       appBar: CustomAppBar(
         title: 'Digital Campus',
         onMenuPressed: () {
-          Scaffold.of(context).openEndDrawer();
+          Builder(
+            builder: (BuildContext context) {
+              showMenu(context);
+              return const SizedBox.shrink(); // Builder needs to return a widget
+            },
+          );
         },
         onBackDoubleTap: _showQuitDialog,
         onBackSingleTap: _handleBackButton,
@@ -164,7 +169,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                  MaterialPageRoute(
+                    builder: (context) => ProfilePage(),
+                  ),
                 );
               },
             ),
@@ -208,5 +215,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     );
+  }
+  void showMenu(BuildContext context){
+    Scaffold.of(context).openEndDrawer();
   }
 }
