@@ -28,38 +28,25 @@ class _ProfilePageState extends State<ProfilePage> {
       if (user == null) return;
 
       final email = user.email;
-      final databaseRef = FirebaseDatabase.instance.ref('digital-campus-student');
+      final databaseRef = FirebaseDatabase.instance.ref('Students');
 
       final snapshot = await databaseRef.get();
+
       if (snapshot.exists && snapshot.value != null) {
-        final data = snapshot.value as dynamic;
+        final data = snapshot.value as Map<dynamic, dynamic>;
 
         bool found = false;
 
-        // Handle map or list format
-        if (data is List) {
-          for (var student in data) {
-            if (student != null &&
-                (student['collegeMail'] == email || student['personalMail'] == email)) {
-              setState(() {
-                studentData = Map<String, dynamic>.from(student);
-                _isLoading = false;
-              });
-              found = true;
-              break;
-            }
+        // Loop through student records
+        data.forEach((key, student) {
+          if (student['collegeMail'] == email || student['personalMail'] == email) {
+            setState(() {
+              studentData = Map<String, dynamic>.from(student);
+              _isLoading = false;
+            });
+            found = true;
           }
-        } else if (data is Map) {
-          data.forEach((key, student) {
-            if (student['collegeMail'] == email || student['personalMail'] == email) {
-              setState(() {
-                studentData = Map<String, dynamic>.from(student);
-                _isLoading = false;
-              });
-              found = true;
-            }
-          });
-        }
+        });
 
         if (!found) {
           print('No matching student found');
@@ -74,6 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() => _isLoading = false);
     }
   }
+
 
 
   @override
