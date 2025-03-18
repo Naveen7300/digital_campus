@@ -84,10 +84,9 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
         child: Stack(
           children: [
             Positioned(
-              top: _isKeyboardVisible? screenHeight*0.15 : screenHeight * 0.27,
+              top: _isKeyboardVisible? screenHeight*0.07 : screenHeight * 0.2,
               left: 0, right: 0, bottom: 0,
               child: Container(
-                height: 932,
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
                   color: Color(0xFFEBEFEE),
@@ -101,9 +100,9 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               )
             ), //the background rounded bex container
             Positioned(
-              top: _isKeyboardVisible? screenHeight * 0.17 : screenHeight * 0.29,
               left: 0,
               right: 0,
+              bottom: _isKeyboardVisible? screenHeight * 0.38 : screenHeight * 0.6,
               child: SizedBox(
                 child: Text(
                   "LOGIN",
@@ -118,9 +117,9 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               ),
             ), //LOGIN Text
             Positioned(
-              top: _isKeyboardVisible? screenHeight * 0.28 : screenHeight * 0.4,
-              left: 20,
-              right: 20,
+              left: 0,
+              right: 0,
+              bottom: _isKeyboardVisible? screenHeight * 0.33 : screenHeight * 0.5,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -154,9 +153,8 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   ),
                 ],
               ),
-            ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
+            ), //Radio buttons for student and parent
+            Positioned(
               bottom: _isKeyboardVisible ? 20 : screenHeight * 0.2,
               left: 30,
               right: 30,
@@ -257,7 +255,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-            ),
+            ), // login form with button
           ],
         ),
       ),
