@@ -14,7 +14,10 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
+  String _mobileNumber = '';
+  String _otp = '';
   bool _isKeyboardVisible = false;
+  bool isStudent = true;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -76,37 +79,85 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color(0xff49117e),
+      backgroundColor: const Color(0xff026A75),
       body: SafeArea(
         child: Stack(
           children: [
-            // Logo
             Positioned(
-              top: screenHeight * 0.15, // Adjust top positioning
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Container(
-                  width: screenWidth * 0.25, // Adjust width
-                  height: screenWidth * 0.25, // Adjust height (square)
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'LOGO',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              top: _isKeyboardVisible? screenHeight*0.15 : screenHeight * 0.27,
+              left: 0, right: 0, bottom: 0,
+              child: Container(
+                height: 932,
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFEBEFEE),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(43),
+                      topRight: Radius.circular(43),
                     ),
                   ),
                 ),
+              )
+            ), //the background rounded bex container
+            Positioned(
+              top: _isKeyboardVisible? screenHeight * 0.17 : screenHeight * 0.29,
+              left: 0,
+              right: 0,
+              child: SizedBox(
+                child: Text(
+                  "LOGIN",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 75,
+                    fontFamily: "Source Serif Pro",
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff026A75),
+                  ),
+                ),
+              ),
+            ), //LOGIN Text
+            Positioned(
+              top: _isKeyboardVisible? screenHeight * 0.28 : screenHeight * 0.4,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: RadioListTile(
+                      value: true,
+                      groupValue: isStudent,
+                      onChanged: (value) => setState(() => isStudent = true),
+                      title: Text(
+                          'Students',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Color(0xff026A75)
+                          )
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: RadioListTile(
+                      value: false,
+                      groupValue: isStudent,
+                      onChanged: (value) => setState(() => isStudent = false),
+                      title: Text(
+                          'Parents',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Color(0xff026A75)
+                          )
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            // Login Form
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
-              bottom: _isKeyboardVisible ? 20 : screenHeight * 0.2, // Adjust bottom positioning
+              bottom: _isKeyboardVisible ? 20 : screenHeight * 0.2,
               left: 30,
               right: 30,
               child: Container(
@@ -120,44 +171,63 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'LOGIN',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff49117e),
+                      if (isStudent)
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            labelText: 'EMAIL',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => _email = value,
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: 'EMAIL',
-                          border: OutlineInputBorder(),
+                        const SizedBox(height: 16.0),
+                      if (isStudent)
+                        TextFormField(
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            labelText: 'PASSWORD',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => _password = value,
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) => _email = value,
-                      ),
-                      const SizedBox(height: 16.0),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'PASSWORD',
-                          border: OutlineInputBorder(),
+
+                      if (!isStudent)
+                        TextFormField(
+                          keyboardType: TextInputType.phone,
+                          decoration: const InputDecoration(
+                            labelText: 'EMAIL / MOBILE NUMBER',
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email/mobile number';
+                            }
+                            return null;
+                          },
+                          onChanged: (value) => _mobileNumber = value,
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                        onChanged: (value) => _password = value,
-                      ),
+                      if (!isStudent)
+                        const SizedBox(height: 16.0),
+                      if (!isStudent)
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'OTP',
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) => _otp = value,
+                        ),
                       const SizedBox(height: 24.0),
                       ElevatedButton(
                         onPressed: () {
@@ -166,25 +236,23 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff49117e),
+                          backgroundColor: const Color(0xff026A75),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                           child: Text(
-                            'LOGIN',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                              'LOGIN',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFEBEFEE)
+                              )
                           ),
                         ),
                       ),
-                      SizedBox(height: _isKeyboardVisible ? 30 : 70),
                     ],
                   ),
                 ),
