@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'navigation_service.dart';
-import 'package:pdfx/pdfx.dart';
+import 'dart:async';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -151,54 +152,71 @@ class DashboardCard extends StatelessWidget {
 
 // Placeholder pages for navigation
 class TimetablePage extends StatefulWidget {
-  final String pdfPath = 'assets/pdf/Class_TT.pdf';
-  const TimetablePage({super.key});
+  final String pdfPath;
+  const TimetablePage({Key? key, this.pdfPath = 'assets/Class_TT.pdf'})
+      : super(key: key);
 
   @override
-  State<TimetablePage> createState() => _TimetablePageState();
+  _TimetablePageState createState() => _TimetablePageState();
 }
 
 class _TimetablePageState extends State<TimetablePage> {
-  late Future<PdfDocument> _pdfDocumentFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _pdfDocumentFuture = _loadPdf();
-  }
-
-  Future<PdfDocument> _loadPdf() async {
-    try {
-      final document = await PdfDocument.openAsset(widget.pdfPath);
-      return document; // Return the Future
-    } catch (e) {
-      // Show an error message if the PDF fails to load
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load PDF: $e')),
-      );
-      return Future.error(e); // Return a Future.error
-    }
-  }
+  final Completer<PDFViewController> _controller =
+  Completer<PDFViewController>();
+  int? pages = 0;
+  int? currentPage = 0;
+  bool isReady = false;
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Timetable')),
-      body: FutureBuilder<PdfDocument>(
-        future: _pdfDocumentFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final pdfDocument = snapshot.data!;
-            final pdfController = PdfController(document: pdfDocument);
-            return PdfView(controller: pdfController);
-          } else {
-            return const Center(child: Text('No PDF found'));
-          }
-        },
+      body: Stack(
+        children: <Widget>[
+          PDFView(
+            filePath: widget.pdfPath,
+            enableSwipe: true,
+            swipeHorizontal: true,
+            autoSpacing: false,
+            pageFling: false,
+            backgroundColor: Colors.grey,
+            onRender: (_pages) {
+              setState(() {
+                pages = _pages;
+                isReady = true;
+              });
+            },
+            onError: (error) {
+              setState(() {
+                errorMessage = error.toString();
+              });
+              print(
+                  error.toString()); // Keep the print for debugging
+            },
+            onPageError: (page, error) {
+              setState(() {
+                errorMessage = 'Page $page: ${error.toString()}';
+              });
+              print('$page: ${error.toString()}'); // Keep the print
+            },
+            onViewCreated: (PDFViewController pdfViewController) {
+              _controller.complete(pdfViewController);
+            },
+            onPageChanged: (int? page, int? total) {
+              if (page != null && total != null) {
+                print('page change: $page/$total');
+                setState(() {
+                  currentPage = page;
+                });
+              }
+            },
+          ),
+          if (!isReady && errorMessage.isEmpty)
+            const Center(child: CircularProgressIndicator()),
+          if (errorMessage.isNotEmpty)
+            Center(child: Text(errorMessage)),
+        ],
       ),
     );
   }
