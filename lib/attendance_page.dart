@@ -80,21 +80,14 @@ class _AttendancePageState extends State<AttendancePage> {
               ),
             ),
             const SizedBox(height: 16),
-            DropdownButton<String>(
-              value: _selectedSemester,
-              items: _semesters.map((String semester) {
-                return DropdownMenuItem<String>(
-                  value: semester,
-                  child: Text(semester),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    _selectedSemester = newValue;
-                    // TODO: Fetch attendance and subject data based on selected semester
-                  });
-                }
+            CustomDropdown(
+              items: _semesters,
+              initialValue: _selectedSemester,
+              onChanged: (String newValue) {
+                setState(() {
+                  _selectedSemester = newValue;
+                  // TODO: Fetch attendance and subject data based on selected semester
+                });
               },
             ),
             const SizedBox(height: 16),
@@ -105,12 +98,23 @@ class _AttendancePageState extends State<AttendancePage> {
             ..._attendanceData.keys.map((subject) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: ListTile(
-                title: Text(subject),
-                trailing: Text('${_attendanceData[subject]!['percentage']}%'),
+                title: Text(
+                    subject,
+                  style: TextStyle(
+                    color: Color(0xFFCFE3DD)
+                  ),
+                ),
+                trailing: Text(
+                    '${_attendanceData[subject]!['percentage']}%',
+                    style: TextStyle(
+                      color: Color(0xFFCFE3DD),
+                      fontSize: 14
+                    )
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                tileColor: Colors.grey[200],
+                tileColor: Color(0xFF026A75),
                 onTap: () => _navigateToSubjectDetails(subject),
               ),
             )),
@@ -134,9 +138,10 @@ class SubjectAttendanceDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Attendance',
       ),
+      backgroundColor: Color(0xffCFE3DD),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -144,28 +149,60 @@ class SubjectAttendanceDetailsPage extends StatelessWidget {
           children: [
             Text(
               subject,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF026A75)
+              ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Text(
               'Overall: ${details['percentage']}%',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 18, color: Color(0xFF026A75)),
             ),
             Text(
               'Total: ${details['total']}',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 18, color: Color(0xFF026A75)),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 15),
             const Text(
               'Dates:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF026A75)),
             ),
             ...(details['dates'] as List<Map<String, String>>).map(
                   (date) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(
-                  '${date['date']}: ${date['status']}',
-                  style: const TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 15.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFCFE3DD),
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(2, 2),
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        date['date']!,
+                        style: const TextStyle(fontSize: 16, color: Color(0xFF026A75)),
+                      ),
+                      Text(
+                        date['status']!,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: date['status'] == 'Present' ? Colors.green : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -173,5 +210,140 @@ class SubjectAttendanceDetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CustomDropdown extends StatefulWidget {
+  final List<String> items;
+  final String initialValue;
+  final ValueChanged<String> onChanged;
+
+  const CustomDropdown({
+    Key? key,
+    required this.items,
+    required this.initialValue,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  State<CustomDropdown> createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  late String _selectedValue;
+  OverlayEntry? _overlayEntry;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget.initialValue;
+  }
+
+  // Create overlay dropdown menu
+  OverlayEntry _createOverlay() {
+    final renderBox = context.findRenderObject() as RenderBox;
+    final offset = renderBox.localToGlobal(Offset.zero);
+
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        left: offset.dx,
+        top: offset.dy + renderBox.size.height + 4,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFCFE3DD),
+              border: Border.all(color: const Color(0xFF026A75)),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: widget.items.map((item) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedValue = item;
+                      _removeOverlay();
+                    });
+                    widget.onChanged(item);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      item,
+                      style: const TextStyle(
+                        color: Color(0xFF026A75),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Show dropdown
+  void _showOverlay() {
+    _overlayEntry = _createOverlay();
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Close dropdown
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (_overlayEntry == null) {
+          _showOverlay();
+        } else {
+          _removeOverlay();
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: const Color(0xFF026A75), width: 2)),
+          borderRadius: BorderRadius.circular(8),
+          color: const Color(0xFFCFE3DD),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _selectedValue,
+              style: const TextStyle(
+                  color: Color(0xFF026A75),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+            const Icon(Icons.arrow_drop_down, color: Color(0xFF026A75)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
   }
 }

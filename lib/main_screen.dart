@@ -162,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xff026A75),
               ),
-              child: Text('Menu'),
+              child: Text('Menu'), //TODO: Create new menu Drawerheader to display user image, name, ID, etc.
             ),
             ListTile(
               title: const Text("Profile"),

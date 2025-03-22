@@ -18,6 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: const Color(0xff026A75),
+      iconTheme: const IconThemeData(color: Color(0xFFCFE3DD)),
       leading: onBackDoubleTap != null && onBackSingleTap != null
           ? GestureDetector(
         onDoubleTap: onBackDoubleTap,
@@ -27,13 +28,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       )
           : null,
-      title: Text(title),
+      title: Text(
+          title,
+        style: TextStyle(
+          color: Color(0xFFCFE3DD),
+          fontWeight: FontWeight.bold,
+          fontSize: 25
+        ),
+      ),
       actions: onMenuPressed != null
           ? [
         Builder(
           builder: (BuildContext context) {
             return IconButton(
               icon: const Icon(Icons.menu, color: Color(0xFFCFE3DD)),
+              padding: EdgeInsets.only(
+                right: 25.0,
+              ),
               onPressed: () {
                 Scaffold.of(context).openEndDrawer(); // Corrected line
                 if (onMenuPressed != null) {

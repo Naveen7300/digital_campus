@@ -68,21 +68,14 @@ class _AcademicsPageState extends State<AcademicsPage> {
               ),
             ),
             const SizedBox(height: 16),
-            DropdownButton<String>(
-              value: _selectedSemester,
-              items: _semesters.map((String semester) {
-                return DropdownMenuItem<String>(
-                  value: semester,
-                  child: Text(semester),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    _selectedSemester = newValue;
-                    // TODO: Fetch subject data based on selected semester
-                  });
-                }
+            CustomDropdown(
+              items: _semesters,
+              initialValue: _selectedSemester,
+              onChanged: (String newValue) {
+                setState(() {
+                  _selectedSemester = newValue;
+                  // TODO: Fetch attendance and subject data based on selected semester
+                });
               },
             ),
             const SizedBox(height: 16),
@@ -258,5 +251,140 @@ class AssignmentDetailsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CustomDropdown extends StatefulWidget {
+  final List<String> items;
+  final String initialValue;
+  final ValueChanged<String> onChanged;
+
+  const CustomDropdown({
+    Key? key,
+    required this.items,
+    required this.initialValue,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  State<CustomDropdown> createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  late String _selectedValue;
+  OverlayEntry? _overlayEntry;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget.initialValue;
+  }
+
+  // Create overlay dropdown menu
+  OverlayEntry _createOverlay() {
+    final renderBox = context.findRenderObject() as RenderBox;
+    final offset = renderBox.localToGlobal(Offset.zero);
+
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        left: offset.dx,
+        top: offset.dy + renderBox.size.height + 4,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFCFE3DD),
+              border: Border.all(color: const Color(0xFF026A75)),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: widget.items.map((item) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedValue = item;
+                      _removeOverlay();
+                    });
+                    widget.onChanged(item);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      item,
+                      style: const TextStyle(
+                        color: Color(0xFF026A75),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Show dropdown
+  void _showOverlay() {
+    _overlayEntry = _createOverlay();
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Close dropdown
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (_overlayEntry == null) {
+          _showOverlay();
+        } else {
+          _removeOverlay();
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: const Color(0xFF026A75), width: 2)),
+          borderRadius: BorderRadius.circular(8),
+          color: const Color(0xFFCFE3DD),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _selectedValue,
+              style: const TextStyle(
+                  color: Color(0xFF026A75),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+            const Icon(Icons.arrow_drop_down, color: Color(0xFF026A75)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
   }
 }
