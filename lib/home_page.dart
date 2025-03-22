@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navigation_service.dart';
+import 'events_page.dart';
 import 'dart:async';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
@@ -153,8 +154,7 @@ class DashboardCard extends StatelessWidget {
 // Placeholder pages for navigation
 class TimetablePage extends StatefulWidget {
   final String pdfPath;
-  const TimetablePage({Key? key, this.pdfPath = 'assets/Class_TT.pdf'})
-      : super(key: key);
+  const TimetablePage({Key? key, this.pdfPath = 'assets/classTT.pdf'}) : super(key: key);
 
   @override
   _TimetablePageState createState() => _TimetablePageState();
@@ -191,8 +191,7 @@ class _TimetablePageState extends State<TimetablePage> {
               setState(() {
                 errorMessage = error.toString();
               });
-              print(
-                  error.toString()); // Keep the print for debugging
+              print(error.toString()); // Keep the print for debugging
             },
             onPageError: (page, error) {
               setState(() {
@@ -247,15 +246,3 @@ class NotificationsPage extends StatelessWidget {
   }
 }
 */ // Notification Page
-
-class EventsPage extends StatelessWidget {
-  const EventsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Events')),
-      body: const Center(child: Text('Events Page')),
-    );
-  }
-}

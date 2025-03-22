@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'customAppBar.dart';
 import 'navigation_service.dart';
 
 class AcademicsPage extends StatefulWidget {
@@ -54,14 +53,21 @@ class _AcademicsPageState extends State<AcademicsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Academics',
-      ),
+      backgroundColor: Color(0xFFCFE3DD),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+              'Academics',
+              style: TextStyle(
+                fontSize: 24,
+                color: Color(0xff026A75),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
             DropdownButton<String>(
               value: _selectedSemester,
               items: _semesters.map((String semester) {

@@ -7,6 +7,7 @@ import 'chats_page.dart';
 import 'package:flutter/services.dart';
 import 'customAppBar.dart';
 import 'profile_page.dart';
+import 'events_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -178,7 +179,12 @@ class _MainScreenState extends State<MainScreen> {
             ListTile(
               title: const Text('Calendar'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EventsPage(),
+                  ),
+                );
               },
             ),
             ListTile(

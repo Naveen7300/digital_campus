@@ -29,7 +29,7 @@ class ChatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Chats')),
+      backgroundColor: Color(0xFFCFE3DD),
       body: ListView.builder(
         itemCount: chatList.length,
         itemBuilder: (context, index) {
@@ -63,7 +63,7 @@ class ChatsPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Implement new chat functionality
+          // TODO: Implement new chat functionality
         },
         child: const Icon(Icons.message),
       ),
