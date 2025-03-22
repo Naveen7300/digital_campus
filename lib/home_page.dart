@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navigation_service.dart';
+import 'package:pdfx/pdfx.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,12 +31,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
+  /*
   void _openNotifications() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const NotificationsPage()),
     );
   }
+  */ // Navigation route to Notification Dash-Card
 
   void _openEvents() {
     // Implement your events opening logic here
@@ -49,15 +52,17 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFCFE3DD),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Home',
+              'Welcome, User !',
               style: TextStyle(
                 fontSize: 24,
+                color: Color(0xff026A75),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -75,11 +80,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                     content: 'Math Homework, Science Project',
                     onTap: _openAssignments,
                   ),
+                  /*
                   DashboardCard(
                     title: 'Notifications',
                     content: 'New grades posted, Parent meeting on Friday',
                     onTap: _openNotifications,
                   ),
+                  */ // Notification Dash-Card
                   DashboardCard(
                     title: 'Events',
                     content: 'School Fair on Saturday',
@@ -125,6 +132,7 @@ class DashboardCard extends StatelessWidget {
                 title,
                 style: const TextStyle(
                   fontSize: 18,
+                  color: Color(0xFF026a75),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -142,14 +150,56 @@ class DashboardCard extends StatelessWidget {
 }
 
 // Placeholder pages for navigation
-class TimetablePage extends StatelessWidget {
+class TimetablePage extends StatefulWidget {
+  final String pdfPath = 'assets/pdf/Class_TT.pdf';
   const TimetablePage({super.key});
+
+  @override
+  State<TimetablePage> createState() => _TimetablePageState();
+}
+
+class _TimetablePageState extends State<TimetablePage> {
+  late Future<PdfDocument> _pdfDocumentFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _pdfDocumentFuture = _loadPdf();
+  }
+
+  Future<PdfDocument> _loadPdf() async {
+    try {
+      final document = await PdfDocument.openAsset(widget.pdfPath);
+      return document; // Return the Future
+    } catch (e) {
+      // Show an error message if the PDF fails to load
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load PDF: $e')),
+      );
+      return Future.error(e); // Return a Future.error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Timetable')),
-      body: const Center(child: Text('Timetable Page')),
+      body: FutureBuilder<PdfDocument>(
+        future: _pdfDocumentFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData) {
+            final pdfDocument = snapshot.data!;
+            final pdfController = PdfController(document: pdfDocument);
+            return PdfView(controller: pdfController);
+          } else {
+            return const Center(child: Text('No PDF found'));
+          }
+        },
+      ),
     );
   }
 }
@@ -166,6 +216,7 @@ class AssignmentsPage extends StatelessWidget {
   }
 }
 
+/*
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
 
@@ -177,6 +228,7 @@ class NotificationsPage extends StatelessWidget {
     );
   }
 }
+*/ // Notification Page
 
 class EventsPage extends StatelessWidget {
   const EventsPage({super.key});

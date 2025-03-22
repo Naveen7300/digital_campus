@@ -149,8 +149,8 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xff49117e),
-        unselectedItemColor: const Color(0xFFE6E6FA),
+        selectedItemColor: const Color(0xff026A75),
+        unselectedItemColor: const Color(0xFFCFE3DD),
         onTap: _onItemTapped,
       ),
       endDrawer: Drawer(
@@ -159,7 +159,7 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: const Color(0xff026A75),
               ),
               child: Text('Menu'),
             ),

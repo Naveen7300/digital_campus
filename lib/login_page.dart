@@ -119,40 +119,50 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
             Positioned(
               left: 0,
               right: 0,
-              bottom: _isKeyboardVisible? screenHeight * 0.33 : screenHeight * 0.5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: RadioListTile(
-                      value: true,
-                      groupValue: isStudent,
-                      onChanged: (value) => setState(() => isStudent = true),
-                      title: Text(
-                          'Students',
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Color(0xff026A75)
-                          )
+              bottom: _isKeyboardVisible? screenHeight * 0.33 : screenHeight * 0.53,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: RadioListTile(
+                        value: true,
+                        groupValue: isStudent,
+                        onChanged: (value) => setState(() => isStudent = true),
+                        title: Text(
+                            'Student',
+                            style: TextStyle(
+                                fontSize: screenWidth * 0.07,
+                                color: Color(0xff026A75)
+                            )
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          left: screenWidth * 0.05,
+                        ),
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: RadioListTile(
-                      value: false,
-                      groupValue: isStudent,
-                      onChanged: (value) => setState(() => isStudent = false),
-                      title: Text(
-                          'Parents',
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Color(0xff026A75)
-                          )
+                    Expanded(
+                      child: RadioListTile(
+                        value: false,
+                        groupValue: isStudent,
+                        onChanged: (value) => setState(() => isStudent = false),
+                        title: Text(
+                            'Parent',
+                            style: TextStyle(
+                                fontSize: screenWidth * 0.07,
+                                color: Color(0xff026A75)
+                            )
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          right: screenWidth * 0.05,
+                        ), // Removes default padding
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              )
             ), //Radio buttons for student and parent
             Positioned(
               bottom: _isKeyboardVisible ? 20 : screenHeight * 0.2,
