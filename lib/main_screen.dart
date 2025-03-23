@@ -199,7 +199,7 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pop(context);
               },
             ),
-            ListTile(
+            /*ListTile(
               title: const Text('Feedback'),
               onTap: () {
                 Navigator.pop(context);
@@ -210,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
               onTap: () {
                 Navigator.pop(context);
               },
-            ),
+            ),*/
             ListTile(
               title: const Text('Logout'),
               onTap: () {
