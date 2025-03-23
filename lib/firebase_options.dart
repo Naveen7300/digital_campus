@@ -47,29 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBNQ8hosOkeC2sd_lxo4ex53X0Wq2sOAG0',
-    appId: '1:367892405378:web:f74a337d7c23c73f0ca89b',
-    messagingSenderId: '367892405378',
-    projectId: 'digital-campus-d2f80',
-    authDomain: 'digital-campus-d2f80.firebaseapp.com',
-    storageBucket: 'digital-campus-d2f80.firebasestorage.app',
-    measurementId: 'G-0TGW42J8PW',
+    apiKey: 'AIzaSyCXjz5zIZnoadZO6c6FNQ-TPlO-D6s3Ems',
+    appId: '1:253750054072:web:9528f32a723bf0e378384d',
+    messagingSenderId: '253750054072',
+    projectId: 'digital-campus-73003',
+    authDomain: 'digital-campus-73003.firebaseapp.com',
+    storageBucket: 'digital-campus-73003.firebasestorage.app',
+    measurementId: 'G-HWELG3SHD3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAmUxknam1uxTNAcvZ_scnyL2OFRznXBjY',
-    appId: '1:367892405378:android:71c39f55cc6186000ca89b',
-    messagingSenderId: '367892405378',
-    projectId: 'digital-campus-d2f80',
-    storageBucket: 'digital-campus-d2f80.firebasestorage.app',
+    apiKey: 'AIzaSyA-eyRyLsKfBRgiwDc1uOAvzw8x5cZ-UMk',
+    appId: '1:253750054072:android:b3ce516960bf3dd678384d',
+    messagingSenderId: '253750054072',
+    projectId: 'digital-campus-73003',
+    storageBucket: 'digital-campus-73003.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDFliTburp4D15OIoTigvn6-LGDIlSGKpA',
-    appId: '1:367892405378:ios:bdfc2dd4188ba7af0ca89b',
-    messagingSenderId: '367892405378',
-    projectId: 'digital-campus-d2f80',
-    storageBucket: 'digital-campus-d2f80.firebasestorage.app',
+    apiKey: 'AIzaSyDwNsTsOAKipGy6hc4fvP4jxcnh9emI0Gk',
+    appId: '1:253750054072:ios:4766ee953bdb3e5978384d',
+    messagingSenderId: '253750054072',
+    projectId: 'digital-campus-73003',
+    storageBucket: 'digital-campus-73003.firebasestorage.app',
     iosBundleId: 'com.example.digitalCampus',
   );
 

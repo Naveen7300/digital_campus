@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "367892405378",
-    "firebase_url": "https://digital-campus-student.firebaseio.com/",
-    "project_id": "digital-campus-d2f80",
-    "storage_bucket": "digital-campus-d2f80.firebasestorage.app"
+    "project_number": "253750054072",
+    "project_id": "digital-campus-73003",
+    "storage_bucket": "digital-campus-73003.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:367892405378:android:71c39f55cc6186000ca89b",
+        "mobilesdk_app_id": "1:253750054072:android:b3ce516960bf3dd678384d",
         "android_client_info": {
           "package_name": "com.example.digital_campus"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAmUxknam1uxTNAcvZ_scnyL2OFRznXBjY"
+          "current_key": "AIzaSyA-eyRyLsKfBRgiwDc1uOAvzw8x5cZ-UMk"
         }
       ],
       "services": {
