@@ -117,7 +117,7 @@ class _AcademicsPageState extends State<AcademicsPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                        tileColor: Color(0xFF026A75),
+                      tileColor: Color(0xFF026A75),
                     ),
                     if (_selectedSubject == subjectName)
                       SubjectDetails(
@@ -360,7 +360,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
             children: [
               GestureDetector(
                 onTap: () {
-                  if(_controller.size < 0.5) {
+                  if(_controller.size < 0.3) {
                     _controller.animateTo(
                       0.8,
                       duration: const Duration(milliseconds: 250),
@@ -400,7 +400,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 ],
               ),
               const SizedBox(height: 15),
-              if (!isFullyOpen) ...[
+              if (_controller.size <= 0.32) ...[
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {},
@@ -414,7 +414,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                   ),
                 )
               ],
-              if (isFullyOpen) ...[
+              if (_controller.size > 0.32) ...[
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
