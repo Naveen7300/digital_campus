@@ -1,10 +1,13 @@
+import 'package:digital_campus/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'admin_doc.dart';
+import 'prof_contact.dart';
 import 'home_page.dart';
 import 'attendance_page.dart';
 import 'academics_page.dart';
 import 'exam_page.dart';
 import 'chats_page.dart';
-import 'package:flutter/services.dart';
 import 'customAppBar.dart';
 import 'profile_page.dart';
 import 'events_page.dart';
@@ -155,6 +158,7 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onItemTapped,
       ),
       endDrawer: Drawer(
+        backgroundColor: const Color(0xFFCFE3DD),
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -165,7 +169,10 @@ class _MainScreenState extends State<MainScreen> {
               child: Text('Menu'), //TODO: Create new menu Drawerheader to display user image, name, ID, etc.
             ),
             ListTile(
-              title: const Text("Profile"),
+              title: const Text(
+                'Profile',
+                style: TextStyle(color: Color(0xFF026A75), fontWeight: FontWeight.bold),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -177,7 +184,10 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
             ListTile(
-              title: const Text('Calendar'),
+              title: const Text(
+                'Calendar',
+                style: TextStyle(color: Color(0xFF026A75), fontWeight: FontWeight.bold),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -188,15 +198,32 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
             ListTile(
-              title: const Text('Prof. Contact'),
+              title: const Text(
+                'Prof. Contact',
+                style: TextStyle(color: Color(0xFF026A75), fontWeight: FontWeight.bold),
+              ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfContactPage(),
+                  ),
+                );
               },
             ),
             ListTile(
-              title: const Text('Admin Doc.'),
+              title: const Text(
+                'Admin Doc.',
+                style: TextStyle(
+                    color: Color(0xFF026A75), fontWeight: FontWeight.bold),
+              ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AdminDocPage(),
+                  ),
+                );
               },
             ),
             /*ListTile(
@@ -212,9 +239,17 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),*/
             ListTile(
-              title: const Text('Logout'),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Color(0xFF026A75), fontWeight: FontWeight.bold),
+              ),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ),
+                );
               },
             ),
           ],
