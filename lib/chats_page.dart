@@ -43,11 +43,11 @@ class ChatsPage extends StatelessWidget {
                 Text(chat['timestamp']),
                 if (chat['unreadCount'] > 0)
                   CircleAvatar(
-                    radius: 10,
-                    backgroundColor: Colors.blue,
+                    radius: 12,
+                    backgroundColor: Color(0xFF026A75),
                     child: Text(
                       chat['unreadCount'].toString(),
-                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                      style: const TextStyle(fontSize: 12, color: Color(0xFFCFE3DD)),
                     ),
                   ),
               ],
@@ -65,7 +65,8 @@ class ChatsPage extends StatelessWidget {
         onPressed: () {
           // TODO: Implement new chat functionality
         },
-        child: const Icon(Icons.message),
+        backgroundColor: Color(0xFF026A75),
+        child: const Icon(Icons.message, color: Color(0xFFCFE3DD)),
       ),
     );
   }

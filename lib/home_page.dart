@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navigation_service.dart';
+import 'customAppBar.dart';
 import 'events_page.dart';
 import 'dart:async';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -74,12 +75,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 children: [
                   DashboardCard(
                     title: 'Upcoming Classes',
-                    content: 'Math, Science, History',
+                    content: 'iOS, MAT',
                     onTap: _openTimetable,
                   ),
                   DashboardCard(
                     title: 'Assignments Due',
-                    content: 'Math Homework, Science Project',
+                    content: 'No assigments due',
                     onTap: _openAssignments,
                   ),
                   /*
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   */ // Notification Dash-Card
                   DashboardCard(
                     title: 'Events',
-                    content: 'School Fair on Saturday',
+                    content: 'No events scheduled',
                     onTap: _openEvents,
                   ),
                 ],
@@ -121,10 +122,12 @@ class DashboardCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 2,
+        elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: Color(0xFF026A75), width: 2),
         ),
+        color: Color(0xFFCFE3DD),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -227,8 +230,18 @@ class AssignmentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Assignments')),
-      body: const Center(child: Text('Assignments Page')),
+      appBar: CustomAppBar(title: 'Assignments'),
+      backgroundColor: Color(0xFFCFE3DD),
+      body: const Center(
+          child: Text(
+              'No Assignments Due...',
+            style: TextStyle(
+              color: Color(0xFF026A75),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+      ),
     );
   }
 }
