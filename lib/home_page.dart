@@ -173,8 +173,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Welcome, User !',
+            Text(
+              'Welcome, ${studentData['name']} !',
               style: TextStyle(
                 fontSize: 24,
                 color: Color(0xff026A75),
