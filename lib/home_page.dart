@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_database/firebase_database.dart';
+import 'timetable_page.dart';
 import 'navigation_service.dart';
 import 'customAppBar.dart';
 import 'events_page.dart';
-import 'dart:async';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -149,76 +150,6 @@ class DashboardCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-// Placeholder pages for navigation
-class TimetablePage extends StatefulWidget {
-  final String pdfPath;
-  const TimetablePage({Key? key, this.pdfPath = 'assets/classTT.pdf'}) : super(key: key);
-
-  @override
-  _TimetablePageState createState() => _TimetablePageState();
-}
-
-class _TimetablePageState extends State<TimetablePage> {
-  final Completer<PDFViewController> _controller =
-  Completer<PDFViewController>();
-  int? pages = 0;
-  int? currentPage = 0;
-  bool isReady = false;
-  String errorMessage = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Timetable')),
-      body: Stack(
-        children: <Widget>[
-          PDFView(
-            filePath: widget.pdfPath,
-            enableSwipe: true,
-            swipeHorizontal: true,
-            autoSpacing: false,
-            pageFling: false,
-            backgroundColor: Colors.grey,
-            onRender: (_pages) {
-              setState(() {
-                pages = _pages;
-                isReady = true;
-              });
-            },
-            onError: (error) {
-              setState(() {
-                errorMessage = error.toString();
-              });
-              print(error.toString()); // Keep the print for debugging
-            },
-            onPageError: (page, error) {
-              setState(() {
-                errorMessage = 'Page $page: ${error.toString()}';
-              });
-              print('$page: ${error.toString()}'); // Keep the print
-            },
-            onViewCreated: (PDFViewController pdfViewController) {
-              _controller.complete(pdfViewController);
-            },
-            onPageChanged: (int? page, int? total) {
-              if (page != null && total != null) {
-                print('page change: $page/$total');
-                setState(() {
-                  currentPage = page;
-                });
-              }
-            },
-          ),
-          if (!isReady && errorMessage.isEmpty)
-            const Center(child: CircularProgressIndicator()),
-          if (errorMessage.isNotEmpty)
-            Center(child: Text(errorMessage)),
-        ],
       ),
     );
   }

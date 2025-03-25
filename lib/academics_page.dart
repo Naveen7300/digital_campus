@@ -321,16 +321,23 @@ class BottomDrawer extends StatefulWidget {
 
 class _BottomDrawerState extends State<BottomDrawer> {
   final DraggableScrollableController _controller = DraggableScrollableController();
-  bool isFullyOpen = false;
+  late ValueNotifier<bool> isFullyOpen;
 
   @override
   void initState() {
     super.initState();
+    isFullyOpen = ValueNotifier<bool>(false); // Initialize ValueNotifier
+
     _controller.addListener(() {
-      setState(() {
-        isFullyOpen = _controller.size == 0.8;
-      });
+      isFullyOpen.value = _controller.size == 0.8; // Update ValueNotifier
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    isFullyOpen.dispose(); // Dispose ValueNotifier
+    super.dispose();
   }
 
   @override
@@ -355,19 +362,18 @@ class _BottomDrawerState extends State<BottomDrawer> {
           ],
         ),
         child: SingleChildScrollView(
-          controller: scrollController, // Enable drag scrolling
+          controller: scrollController,
           child: Column(
             children: [
               GestureDetector(
                 onTap: () {
-                  if(_controller.size < 0.3) {
+                  if (_controller.size < 0.3) {
                     _controller.animateTo(
                       0.8,
                       duration: const Duration(milliseconds: 250),
                       curve: Curves.easeOut,
                     );
-                  }
-                  else {
+                  } else {
                     _controller.animateTo(
                       0.24,
                       duration: const Duration(milliseconds: 250),
@@ -388,9 +394,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                   Text(
                     'Your work',
                     style: TextStyle(
-                        color: Color(0xFF026A75),
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold),
+                      color: Color(0xFF026A75),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Spacer(),
                   Text(
@@ -400,82 +407,91 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 ],
               ),
               const SizedBox(height: 15),
-              if (_controller.size <= 0.32) ...[
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF026A75),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                  child: const Text(
-                    '+ Add Work',
-                    style: TextStyle(color: Color(0xFFCFE3DD), fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-              if (_controller.size > 0.32) ...[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Attachments',
-                    style: TextStyle(
-                        color: Color(0xFF026A75),
-                        fontSize: 22,
-                    )
-                  )
-                ),
-                const SizedBox(height: 15),
-                const Divider(color: Colors.grey),
-                const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 150),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFCFE3DD),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                    children: [
-                      Center(
-                        child: Text(
-                          'You have no Attachments uploaded',
-                          style: TextStyle(
-                            color: Colors.grey[700],
-                            fontSize: 14
-                          )
-                        )
-                      )
-                    ]
-                  )
-                ),
-                const SizedBox(height: 10),
-                const Divider(color: Colors.grey),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF026A75),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                  child: const Text(
-                    '+ Add Work',
-                    style: TextStyle(color: Color(0xFFCFE3DD), fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: const Color(0xFFCFE3DD),
-                    minimumSize: const Size(double.infinity, 50),
-                    side: BorderSide(color: const Color(0xFF026A75), style: BorderStyle.solid, width: 2.5),
-                  ),
-                  child: const Text(
-                    'Mark as Done',
-                    style: TextStyle(color: Color(0xFF026A75), fontSize: 16),
-                  ),
-                ),
-              ]
+              ValueListenableBuilder<bool>( // Use ValueListenableBuilder
+                valueListenable: isFullyOpen,
+                builder: (context, value, child) {
+                  if (!value) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF026A75),
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
+                          child: const Text(
+                            '+ Add Work',
+                            style: TextStyle(color: Color(0xFFCFE3DD), fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Attachments',
+                            style: TextStyle(
+                              color: Color(0xFF026A75),
+                              fontSize: 22,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        const Divider(color: Colors.grey),
+                        const SizedBox(height: 10),
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 150),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFCFE3DD),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Text(
+                                  'You have no Attachments uploaded',
+                                  style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Divider(color: Colors.grey),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF026A75),
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
+                          child: const Text(
+                            '+ Add Work',
+                            style: TextStyle(color: Color(0xFFCFE3DD), fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: const Color(0xFFCFE3DD),
+                            minimumSize: const Size(double.infinity, 50),
+                            side: BorderSide(color: const Color(0xFF026A75), style: BorderStyle.solid, width: 2.5),
+                          ),
+                          child: const Text(
+                            'Mark as Done',
+                            style: TextStyle(color: Color(0xFF026A75), fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
