@@ -15,11 +15,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+  Map<String, dynamic> studentData = {};
+  Map<dynamic, dynamic> timetableData = {};
+  bool _isLoading = true;
+
   @override
   void initState() {
     super.initState();
     NavigationService.setCurrentRoute('/HomePage');
     WidgetsBinding.instance.addObserver(this);
+    _fetchData();
   }
 
   void _openTimetable() {
@@ -27,6 +32,111 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       context,
       MaterialPageRoute(builder: (context) => const TimetablePage()),
     );
+  }
+
+  Future<void> _fetchData() async {
+    await fetchStudentData();
+    if (studentData.isNotEmpty) {
+      await fetchTimetableData();
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> fetchStudentData() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) return;
+
+      final email = user.email;
+      final databaseRef = FirebaseDatabase.instance.ref('Students');
+
+      final snapshot = await databaseRef.get();
+
+      if (snapshot.exists && snapshot.value != null) {
+        final data = snapshot.value as Map<dynamic, dynamic>;
+
+        bool found = false;
+
+        data.forEach((key, student) {
+          if (student['collegeMail'] == email || student['personalMail'] == email) {
+            setState(() {
+              studentData = Map<String, dynamic>.from(student);
+            });
+            found = true;
+          }
+        });
+
+        if (!found) {
+          print('No matching student found');
+        }
+      } else {
+        print('No data found in Firebase');
+      }
+    } catch (e) {
+      print('Error fetching student data: $e');
+    }
+  }
+
+  Future<void> fetchTimetableData() async {
+    try {
+      if (studentData.isNotEmpty) {
+        int semester = int.tryParse(studentData['semester'].toString()) ?? 0;
+        String specialization = studentData['specialization'];
+
+        final databaseRefT = FirebaseDatabase.instance.ref('timetables/$semester/$specialization');
+        final snapshot = await databaseRefT.get();
+
+        if (snapshot.exists && snapshot.value != null) {
+          setState(() {
+            timetableData = snapshot.value as Map<dynamic, dynamic>;
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _isLoading = false;
+          });
+          print('No timetable found for semester $semester and specialization $specialization');
+        }
+      }
+    } catch (e) {
+      print('Error fetching timetable: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  String getNextClassSubject(Map<dynamic, dynamic> timetableData) {
+    final now = DateTime.now();
+    final todayWeekday = DateFormat('EEEE').format(now);
+    final currentTime = DateFormat('hh:mm a').parse(DateFormat('hh:mm a').format(now)); // Parse current time
+
+    if (timetableData.containsKey(todayWeekday)) {
+      final todayClasses = timetableData[todayWeekday] as List<dynamic>;
+
+      // Sort classes by start time in 12-hour format
+      todayClasses.sort((a, b) {
+        final startTimeA = DateFormat('hh:mm a').parse(a['time'].split('-')[0]);
+        final startTimeB = DateFormat('hh:mm a').parse(b['time'].split('-')[0]);
+        return startTimeA.compareTo(startTimeB);
+      });
+
+      for (final classItem in todayClasses) {
+        final startTime = DateFormat('hh:mm a').parse(classItem['time'].split('-')[0]);
+
+        if (startTime.isAfter(currentTime)) {
+          return classItem['subject']; // Return the next class
+        }
+      }
+
+      // If all classes are over, return "No upcoming classes today."
+      return 'No upcoming classes today.';
+    }
+
+    return 'No upcoming classes today.';
   }
 
   void _openAssignments() {
@@ -77,7 +187,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 children: [
                   DashboardCard(
                     title: 'Upcoming Classes',
-                    content: 'iOS, MAT',
+                    content: getNextClassSubject(timetableData),
                     onTap: _openTimetable,
                   ),
                   DashboardCard(

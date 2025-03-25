@@ -1,360 +1,9 @@
 {
-  "timetables": {
-    "6": {
-      "MACT": {
-        "Monday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "12:35-1:25",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Tuesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Wednesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Thursday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Friday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Saturday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Windows Azure"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ]
-      },
-      "ISMA": {
-        "Monday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "12:35-1:25",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Tuesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Wednesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Thursday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Friday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ],
-        "Saturday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Mobile App Testing"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cyber Forensics"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "iOS Development"
-          }
-        ]
-      }
-    },
-    "4": {
-      "MACT": {
-        "Monday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "12:35-1:25",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Tuesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Wednesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Thursday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Friday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Saturday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Cloud Computing"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ]
-      },
-      "ISMA": {
-        "Monday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "12:35-1:25",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Tuesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Wednesday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Thursday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Friday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ],
-        "Saturday": [
-          {
-            "time": "11:45-12:35",
-            "subject": "Python Programming"
-          },
-          {
-            "time": "12:35-01:25",
-            "subject": "Fundamental of Information Security"
-          },
-          {
-            "time": "02:10-03:00",
-            "subject": "Android Application Development"
-          }
-        ]
-      }
-    }
-  },
   "Courses": "",
   "Departments": "",
   "Staff": "",
   "Students": {
     "00001": {
-      "semester": "6",
       "abcId": "1234-5678-9013",
       "address": "456 Oak Ave, Bengaluru",
       "batch": "2022-2025",
@@ -372,11 +21,11 @@
       "name": "Alice Smith",
       "personalMail": "alice.smith@example.com",
       "profilePhoto": "assets/student1.jpg",
+      "semester": "6",
       "specialization": "ISMA",
       "usn": "22BCAR0435"
     },
     "00002": {
-      "semester": "6",
       "abcId": "1234-5678-9014",
       "address": "789 Pine Ln, Bengaluru",
       "batch": "2022-2025",
@@ -394,11 +43,11 @@
       "name": "Naveen Jain",
       "personalMail": "codex.naveenj@gmail.com",
       "profilePhoto": "assets/student2.jpg",
+      "semester": "6",
       "specialization": "MACT",
       "usn": "22BCAR0281"
     },
     "00003": {
-      "semester": "4",
       "abcId": "1234-5678-9015",
       "address": "101 Maple Dr, Bengaluru",
       "batch": "2023-2026",
@@ -416,11 +65,11 @@
       "name": "Charlie Williams",
       "personalMail": "charlie.williams@example.com",
       "profilePhoto": "assets/student3.jpg",
+      "semester": "4",
       "specialization": "ISMA",
       "usn": "23BCAR0543"
     },
     "00004": {
-      "semester": "4",
       "abcId": "1234-5678-9016",
       "address": "222 Birch Rd, Bengaluru",
       "batch": "2023-2026",
@@ -438,8 +87,359 @@
       "name": "Diana Brown",
       "personalMail": "diana.brown@example.com",
       "profilePhoto": "assets/student4.jpg",
+      "semester": "4",
       "specialization": "MACT",
       "usn": "23BCAR0374"
+    }
+  },
+  "timetables": {
+    "6": {
+      "MACT": {
+        "Monday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Tuesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Wednesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Thursday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Friday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Saturday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Windows Azure"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ]
+      },
+      "ISMA": {
+        "Monday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Tuesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Wednesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Thursday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Friday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ],
+        "Saturday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Mobile App Testing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cyber Forensics"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "iOS Development"
+          }
+        ]
+      }
+    },
+    "4": {
+      "MACT": {
+        "Monday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Tuesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Wednesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Thursday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Friday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Saturday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Cloud Computing"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ]
+      },
+      "ISMA": {
+        "Monday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Tuesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Wednesday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Thursday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Friday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ],
+        "Saturday": [
+          {
+            "time": "11:45 AM-12:35 PM",
+            "subject": "Python Programming"
+          },
+          {
+            "time": "12:35 PM-01:25 PM",
+            "subject": "Fundamental of Information Security"
+          },
+          {
+            "time": "02:10 PM-03:00 PM",
+            "subject": "Android Application Development"
+          }
+        ]
+      }
     }
   }
 }
