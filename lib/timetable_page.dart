@@ -103,12 +103,20 @@ class _TimetablePageState extends State<TimetablePage> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       return const Scaffold(
+        appBar: CustomAppBar(
+            title: 'Time Table'
+        ),
+        backgroundColor: Color(0xFFCFE3DD),
         body: Center(child: CircularProgressIndicator()),
       );
     }
 
     if (timetableData.isEmpty) {
       return const Scaffold(
+        appBar: CustomAppBar(
+            title: 'Time Table'
+        ),
+        backgroundColor: Color(0xFFCFE3DD),
         body: Center(child: Text('No timetable available.')),
       );
     }
