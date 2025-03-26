@@ -14,6 +14,11 @@ class _ProfContactPageState extends State<ProfContactPage> {
   // Sample professor data (replace with your actual data)
   final List<Map<String, String>> _professors = [
     {
+      'name': 'Dr. K. Suneetha',
+      'contact': '8473689840',
+      'email': 'k.suneetha@jainuniversity.ac.in',
+    },
+    {
       'name': 'Dr. Sanjeev Kumar Mandal',
       'contact': '9876543210',
       'email': 'sanjeev@jainuniversity.ac.in',

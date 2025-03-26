@@ -16,11 +16,20 @@ class _EventsPageState extends State<EventsPage> with WidgetsBindingObserver {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
 
+  // Add the event for 28/03/2025
+  Map<DateTime, List<String>> _events = {
+    DateTime.utc(2025, 3, 28): ['Final Semester Project Report Submission'],
+  };
+
   @override
   void initState() {
     super.initState();
     NavigationService.setCurrentRoute('/EventsPage');
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  List<String> _getEventsForDay(DateTime day) {
+    return _events[day] ?? [];
   }
 
   @override
@@ -71,8 +80,7 @@ class _EventsPageState extends State<EventsPage> with WidgetsBindingObserver {
                 ),
               ),
               calendarBuilders: CalendarBuilders(
-                // Use a builder that returns a Widget for each day.
-                defaultBuilder : (BuildContext context, DateTime day, DateTime focusedDay) {
+                defaultBuilder: (BuildContext context, DateTime day, DateTime focusedDay) {
                   if (isSameDay(day, _selectedDay)) {
                     return Container(
                       margin: const EdgeInsets.all(4.0),
@@ -109,9 +117,9 @@ class _EventsPageState extends State<EventsPage> with WidgetsBindingObserver {
                     child: Text(
                       day.day.toString(),
                       style: TextStyle(
-                          fontSize: 17,
-                          color: Color(0xFFCFE3DD),
-                          fontWeight: FontWeight.bold
+                        fontSize: 17,
+                        color: Color(0xFFCFE3DD),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   );
@@ -136,13 +144,13 @@ class _EventsPageState extends State<EventsPage> with WidgetsBindingObserver {
                 markerBuilder: (context, day, events) {
                   if (events.isNotEmpty) {
                     return Positioned(
-                      bottom: 1,
+                      bottom: 7,
                       child: Container(
                         height: 8.0,
                         width: 8.0,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.red,
+                          color: Colors.black,
                         ),
                       ),
                     );
@@ -150,16 +158,49 @@ class _EventsPageState extends State<EventsPage> with WidgetsBindingObserver {
                   return null;
                 },
               ),
+              eventLoader: _getEventsForDay, // Add eventLoader here
             ),
             const SizedBox(height: 20),
+            Text(
+              "Events for ${_selectedDay.toString().split(' ')[0]}",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF026A75),
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Divider(color: Colors.grey,),
+            const SizedBox(height: 10),
             Expanded(
-              child: Text(
-                "Events for ${_selectedDay.toString().split(' ')[0]}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF026A75),
-                  fontSize: 16,
-                ),
+              child: ListView(
+                children: _getEventsForDay(_selectedDay)
+                    .map((event) => Container( // Wrap ListTile in Container
+                  decoration: BoxDecoration(
+                    color: Color(0xffcfe3dd), // Add background color
+                    borderRadius: BorderRadius.circular(8.0), // Optional: Add rounded corners
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey, // Shadow color
+                        spreadRadius: 2, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 4.0), // Add margin for spacing
+                  child: ListTile(
+                    title: Text(
+                      event,
+                      style: TextStyle(
+                        color: Color(0xff026a75),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      )
+                    ),
+                  ),
+                ))
+                    .toList(),
               ),
             ),
           ],
